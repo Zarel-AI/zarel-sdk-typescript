@@ -1,0 +1,31 @@
+{
+    // The TYPE-LEVEL ASSERTIONS in this package's tests, and nothing else.
+    //
+    // `tsconfig.json` excludes `tests/`, and the test tree as a whole is not type-checked yet. But
+    // two suites here are ONLY type-level assertions (`const _x: Extends<A, B> = true`), and jest
+    // transpiles without checking, so until something compiles them they assert NOTHING while
+    // reading like a passing suite. Check them with `npx tsc -p tsconfig.assertions.json`.
+    //
+    // A narrow config says what is true — these files are compiled, the rest of `tests/` is not.
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "rootDir": ".",
+        "types": [
+            "node",
+            "jest"
+        ]
+    },
+    // ONLY the assertion files. `tsc` still checks everything they import, so the src they
+    // depend on is covered as a dependency — and listing `src/**/*` here would have re-checked
+    // the whole tree `tsconfig.json` already checks, for no extra coverage. It would also have compiled src under a NARROWED `types`, so the same
+    // sources would be checked twice under two different ambient environments.
+    "include": [
+        "tests/conversation-turn-types-assignability.test.ts",
+        "tests/confirmation-types-assignability.test.ts"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}

@@ -29,3 +29,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Every commit needs a `Signed-off-by:` li
 ## License
 
 MIT © 2026 Nicolas Moreno. See [LICENSE](LICENSE).
+
+<!-- DCO probe, not for merge -->
